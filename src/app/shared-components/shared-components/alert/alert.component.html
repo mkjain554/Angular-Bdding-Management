@@ -1,0 +1,13 @@
+  <h1 mat-dialog-title>{{data.alertHeader}}</h1>
+  <div mat-dialog-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Enter your bid.</mat-label>
+        <input matInput name="bidPrice" placeholder="Bid price" [(ngModel)]="data.data">
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="action(data.data)" class="butnClass">OK</button>&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button color="warn" (click)="no()" class="butnClass">Cancel</button>
+  </div>

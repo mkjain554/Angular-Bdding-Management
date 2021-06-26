@@ -1,0 +1,14 @@
+.header{
+    background-color: #FFD001;
+    height: 80px;
+    
+}
+
+.header img{
+    height: 77px;
+}
+.main-contain{
+    height: calc(100vh - 144px); 
+    padding-bottom: 0px; 
+    overflow: auto;
+}

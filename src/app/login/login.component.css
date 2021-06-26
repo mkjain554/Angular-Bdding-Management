@@ -1,0 +1,20 @@
+
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url('../../assets/img/login.png');
+  background-size: cover;
+  background-position: center center;
+}
+
+.logoCss{
+  height: 180px;
+}
+.error_msg{
+  color: red;
+  font-size: 10px;
+  padding: 5px 0px 10px 17px;
+}

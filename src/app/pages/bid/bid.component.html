@@ -1,0 +1,21 @@
+<div class="container mt-5 p-3 rounded cart">
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <div class="product-details mr-2">
+                <div class="d-flex flex-row align-items-center"><span class="ml-2">Product</span></div>
+                <hr>
+       <div class="col-md-6">
+        <img [src]="getProductDetail().Image" class="img-fluid" alt="Responsive image">
+       </div>
+       <div class="col-md-6">
+        <div class="d-flex flex-row align-items-center">
+            <span>Base Price: {{getProductDetail().BasePrice}}</span>
+            <span class="d-block p-3 float-left">Total Bids : {{1}}</span>
+            <button type="button" class="btn btn-warning float-left" (click)="makeaBid(getProductDetail().Bids)">Bid</button>
+            </div>
+    </div>
+       </div>
+            </div>
+        </div>
+        </div>
+      
