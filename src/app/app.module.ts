@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { AlertComponent } from './shared-components/shared-components/alert/alert.component';
 import { MaterialModule } from './material/material.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
