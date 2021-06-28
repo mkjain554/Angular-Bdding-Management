@@ -1,3 +1,5 @@
+//After App-routing.module this is our main page which is/will handle the routing for the apges
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from '../pages/home/home.component';

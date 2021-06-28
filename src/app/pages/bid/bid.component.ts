@@ -19,10 +19,13 @@ export class BidComponent implements OnInit {
     this.subscription = this.appService.getData().subscribe(data => { this.product = data });
     this.parmId = this.route.snapshot.params.id;
   }
+
+  //get the specific Product detail.
   getProductDetail() {
     return this.product[this.parmId];
   }
 
+  //this function is use to get the CurrentBid price of a specific user.
   getProductDetailBidPrice() {
     if (this.product[this.parmId].Bids?.length > 0) {
       return this.product[this.parmId].Bids[this.product[this.parmId].Bids?.map((s: any) => {
@@ -32,7 +35,10 @@ export class BidComponent implements OnInit {
       return 0;
     }
   }
+
+  //This method is used to open the popup for bidding.
   makeaBid(bid: number) {
+    //we can sent additional data into the data parm of material dialog.
     let msg: any = '';
     msg = {
       "alertHeader": "Hit a Bid",

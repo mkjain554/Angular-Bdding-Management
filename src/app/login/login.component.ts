@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {AppService} from '../service/app.service.service'
+import { AppService } from '../service/app.service.service'
 
 
 @Component({
@@ -10,6 +10,7 @@ import {AppService} from '../service/app.service.service'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  //typescripting of our variable scope and initilize them .
   loginFormGroup: any = FormGroup;
   emailId: string = '';
   password: string = '';
@@ -32,29 +33,14 @@ export class LoginComponent implements OnInit {
     "AccountBalance": 6000
   }];
 
-  passRequirements = {
-    passwordMinLowerCase: 1,
-    passwordMinNumber: 1,
-    passwordMinSymbol: 1,
-    passwordMinUpperCase: 1,
-    passwordMinCharacters: 8
-  };
-  constructor(private formBuilder: FormBuilder, private route: Router, private appService : AppService) { }
+  //Depandency Injusction Performed
+  constructor(private formBuilder: FormBuilder, private route: Router, private appService: AppService) { }
 
   ngOnInit(): void {
+    //set the userdata as we are not using backend services. For database management I am using Localstorage to keep track of data.
     this.appService.setUserData(this.userData);
-    localStorage.setItem("allUserData",JSON.stringify(this.userData));
-    this.pattern = [
-      `(?=([^a-z]*[a-z])\{${this.passRequirements.passwordMinLowerCase},\})`,
-      `(?=([^A-Z]*[A-Z])\{${this.passRequirements.passwordMinUpperCase},\})`,
-      `(?=([^0-9]*[0-9])\{${this.passRequirements.passwordMinNumber},\})`,
-      `(?=(\.\*[\$\@\$\!\%\*\?\&])\{${this.passRequirements.passwordMinSymbol
-      },\})`,
-      `[A-Za-z\\d\$\@\$\!\%\*\?\&\.]{${this.passRequirements.passwordMinCharacters
-      },}`
-    ]
-      .map(item => item.toString())
-      .join("");
+    localStorage.setItem("allUserData", JSON.stringify(this.userData));
+    //check velidation for username and password field ,we can provide custom validation using custom directives.
     this.loginFormGroup = this.formBuilder.group({
       password: ["",
         [Validators.required],
@@ -66,8 +52,9 @@ export class LoginComponent implements OnInit {
 
   }
 
+  //I am only maching the EmailId for now to authenticate the valid user.
   login() {
-    this.appService.getUserData().subscribe((result:any)=>{
+    this.appService.getUserData().subscribe((result: any) => {
       this.getUserData = result
     })
     const matchCred = this.getUserData.map((o: any) => {
@@ -76,7 +63,9 @@ export class LoginComponent implements OnInit {
     if (matchCred >= 0) {
       this.route.navigate(['home']);
       localStorage.setItem("UserDB", JSON.stringify(this.getUserData[matchCred]));
-  }else {
+    } else {
+
+      //I simplly use the scripting alert to show the message we can use material POPup to show the Alerts like I did while adding the bidding price.
       alert("Invalid User name or password");
     }
   }

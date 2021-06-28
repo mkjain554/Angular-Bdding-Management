@@ -1,3 +1,5 @@
+// We can create the common popup for all the Generic alerts messages
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppService } from '../../../service/app.service.service';
@@ -21,10 +23,12 @@ export class AlertComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  //close the popup using click event
   no() {
     this.dialogRef.close()
   }
 
+  //get the reaquired data using Subscribe to a particular BehaviourSubject.
   action(idx: number) {
     this.unsub = this.appService.getData().pipe(
       take(1),
@@ -32,9 +36,9 @@ export class AlertComponent implements OnInit {
       this.setvaluesToDB(data, this.data.id)
     });
   }
-
+//This Method is responsibel for maintaing the Availabe Balance for a particular User
+//This method submitting/Updating the Bid
   setvaluesToDB(newdata: any, idx: number) {
-
     let actuallySpent = this.data.data;
     const indexOfUser = newdata[idx].Bids?.map((d: any) => {
       return d.UserId
@@ -56,7 +60,6 @@ export class AlertComponent implements OnInit {
     }
     this.appService.setData(newdata);
     if (JSON.parse(localStorage.getItem("UserDB") || "").AccountBalance - actuallySpent < 0) {
-      alert("Your Account balance is low for this bid!")
       this.msgFlag = true;
       this.msgData = "Your Account balance is low for this bid!"
       return;
