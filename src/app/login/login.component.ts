@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import {AppService} from '../service/app.service.service'
 
 
 @Component({
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   emailId: string = '';
   password: string = '';
   pattern: any = '';
+  getUserData: Array<any> = [];
   userData: Array<any> = [{
     "Id": 1,
     "Name": "Manish Jain",
@@ -38,9 +39,11 @@ export class LoginComponent implements OnInit {
     passwordMinUpperCase: 1,
     passwordMinCharacters: 8
   };
-  constructor(private formBuilder: FormBuilder, private route: Router) { }
+  constructor(private formBuilder: FormBuilder, private route: Router, private appService : AppService) { }
 
   ngOnInit(): void {
+    this.appService.setUserData(this.userData);
+    localStorage.setItem("allUserData",JSON.stringify(this.userData));
     this.pattern = [
       `(?=([^a-z]*[a-z])\{${this.passRequirements.passwordMinLowerCase},\})`,
       `(?=([^A-Z]*[A-Z])\{${this.passRequirements.passwordMinUpperCase},\})`,
@@ -56,7 +59,7 @@ export class LoginComponent implements OnInit {
       password: ["",
         [Validators.required],
       ],
-      emailId: ["",
+      emailId: ["manish@gmail.com",
         [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]
       ]
     })
@@ -64,15 +67,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginFormGroup.controls.emailId.value)
-    const matchCred = this.userData.map((o: any) => {
+    this.appService.getUserData().subscribe((result:any)=>{
+      this.getUserData = result
+    })
+    const matchCred = this.getUserData.map((o: any) => {
       return o.Email;
     }).indexOf(this.loginFormGroup.controls.emailId.value);
-    console.log(matchCred)
     if (matchCred >= 0) {
       this.route.navigate(['home']);
-      localStorage.setItem("UserDB", JSON.stringify(this.userData[matchCred]));
-    } else {
+      localStorage.setItem("UserDB", JSON.stringify(this.getUserData[matchCred]));
+  }else {
       alert("Invalid User name or password");
     }
   }

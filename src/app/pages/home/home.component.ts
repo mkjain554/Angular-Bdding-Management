@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   //while adding the type we can use interface or directly provide the type [{"Id":number,"Name":string,"BasePrice":number}]
   //change the startTime and EndTime to check the challange status.
   products:Array<any> = [
-    {"Id":1,"Name":"Rolls-Royce Phantom","BasePrice":100,"Make":2020,"Image":"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rr-phantom-viii-16-1501184786.jpg?crop=1xw:1xh;center,top&resize=480:*","Bids":[],"Challenge":{"StartTime":"2021-06-24 2:30","EndTime":"2021-06-27 2:30"}},
+    {"Id":1,"Name":"Rolls-Royce Phantom","BasePrice":100,"Make":2020,"Image":"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rr-phantom-viii-16-1501184786.jpg?crop=1xw:1xh;center,top&resize=480:*","Bids":[],"Challenge":{"StartTime":"2021-06-24 2:30","EndTime":"2021-06-30 2:30"}},
     {"Id":2,"Name":"Rolls-Royce Dawn","BasePrice":100,"Make":2021,"Image":"https://hips.hearstapps.com/roa.h-cdn.co/assets/16/24/1600x800/landscape-1466350630-roa070116dpt-drives-rolls-02.jpg?resize=480:*","Bids":[],"Challenge":{"StartTime":"2021-06-22 2:30","EndTime":"2021-06-29 2:30"}},
     {"Id":3,"Name":"Rolls-Royce Wraith","BasePrice":100,"Make":2018,"Image":"https://hips.hearstapps.com/roa.h-cdn.co/assets/16/01/1280x640/landscape-1452201739-rolls-royce-wraith-2014-1600x1200-wallpaper-01.jpg?resize=480:*","Bids":[],"Challenge":{"StartTime":"2021-06-23 2:30","EndTime":"2021-06-26 12:30"}},
     {"Id":4,"Name":"Rolls-Royce Cullinan","BasePrice":100,"Make":2019,"Image":"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cullinan-magma-red-ext-4-1525901623.jpg?crop=1xw:1xh;center,top&resize=480:*","Bids":[],"Challenge":{"StartTime":"2021-06-02 2:30","EndTime":"2021-06-12 2:30"}},
@@ -53,17 +53,10 @@ goForBidding(idx:number){
             
 }
 status(id:number){
-  // const startDate = new Date("2021-06-24 2:30");    
   const startDate = new Date(String(this.products[id].Challenge.StartTime));    
   const endDate = new Date(String(this.products[id].Challenge.EndTime)); 
-  // const endDate = new Date("2021-06-28 2:30"); 
   const currentDate = new Date();
-  console.log("endDate="+endDate)
-  console.log(this.products[id].Challenge.StartTime)
-  console.log("current >>>>"+ (currentDate > startDate))
-  console.log("=======>>>"+(startDate < endDate))
   if (currentDate > startDate && currentDate < endDate) {  
-    console.log()  
       this.products[id].Challenge.status = true;
       return true;
    }else {    

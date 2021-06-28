@@ -8,7 +8,9 @@ export class AppService {
  
  modelData : any = [];
 
-  public  subdataSource = new BehaviorSubject<any>([]);
+  
+ public  subdataSource = new BehaviorSubject<any>([]);
+ public  userDataSource = new BehaviorSubject<any>([]);
 
   constructor() { 
    
@@ -24,6 +26,16 @@ export class AppService {
 
   getData(): Observable<any> {
     return this.subdataSource.asObservable();
+  }
+
+  setUserData(data: Array<any>) {
+    console.log("set data to DB===>"+JSON.stringify(data))
+    // localStorage.setItem("allUserData",JSON.stringify(data));
+    this.userDataSource.next(data);
+  }
+
+  getUserData(): Observable<any> {
+    return this.userDataSource.asObservable();
   }
   
 }

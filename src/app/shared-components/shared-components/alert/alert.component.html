@@ -7,6 +7,7 @@
       </mat-form-field>
     </form>
   </div>
+  <div class="error_msg" *ngIf="msgFlag">{{msgData}}</div>
   <div mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="action(data.data)" class="butnClass">OK</button>&nbsp;&nbsp;&nbsp;
     <button mat-raised-button color="warn" (click)="no()" class="butnClass">Cancel</button>
